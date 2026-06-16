@@ -1,0 +1,39 @@
+From: ana.k@example.com
+Subject: Damaged on arrival
+Ordered the Compact Puzzle 048 last week. The box arrived crushed and the product does not turn on.
+I expect a replacement or a full refund. Order O-12345.
+---
+From: m.weiss@example.org
+Subject: Wrong item received
+I ordered a Smart Blender 019 but received some kind of kitchen scale instead. Please advise how to
+return it. Mildly annoyed but mistakes happen.
+---
+From: luca.b@example.com
+Subject: STILL WAITING
+Three weeks!!! Three weeks and my Max Desk Pad 057 has not arrived. Tracking has not moved since
+day 2. This is unacceptable, cancel the order if it has not shipped.
+---
+From: petra.n@example.org
+Subject: Battery question / possible defect
+The Premium Kettle 014 I bought a month ago now only lasts about 20 minutes on a charge. Is this
+normal? If not I would like to claim warranty.
+---
+From: t.horvat@example.com
+Subject: Refund not received
+I returned the Classic Mirror 038 12 days ago (you confirmed receipt) but no refund has appeared on
+my card. Please check.
+---
+From: julia.f@example.org
+Subject: Small part missing
+Love the Basic Organizer 024, but the small connector piece listed in the manual was not in the box.
+Could you send just that part? No rush.
+---
+From: d.kos@example.com
+Subject: Charged twice
+My card statement shows two charges for one Smart Headphones 007 order. One of them needs to be
+reversed, please.
+---
+From: s.varga@example.org
+Subject: Item smells of chemicals
+The Deluxe Tent 029 has a very strong chemical smell even after airing it for a week. Is it safe
+for children? Considering returning it.

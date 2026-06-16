@@ -1,0 +1,21 @@
+# Python build artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# OS / OneDrive / Office lock files
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
+
+# Editors
+.vscode/
+.idea/
+*.swp

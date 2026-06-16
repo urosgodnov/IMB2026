@@ -1,0 +1,81 @@
+{
+  "fy": {
+    "total_revenue": 815629.71,
+    "n_orders": 4614,
+    "n_customers": 1093,
+    "aov": 176.77,
+    "best_month": "2024-12",
+    "best_month_revenue": 96505.68,
+    "top_category": "Electronics",
+    "top_product": "Compact Mirror 042",
+    "h1": 395447.33,
+    "h2": 420182.38,
+    "monthly": {
+      "2024-07": 44468.5,
+      "2024-08": 47896.73,
+      "2024-09": 54635.43,
+      "2024-10": 68475.95,
+      "2024-11": 83465.04,
+      "2024-12": 96505.68,
+      "2025-01": 55452.19,
+      "2025-02": 59387.67,
+      "2025-03": 73673.01,
+      "2025-04": 73732.03,
+      "2025-05": 77855.33,
+      "2025-06": 80082.15
+    }
+  },
+  "top_country": "Slovenia",
+  "top_country_revenue": 247057.14,
+  "metrics": {
+    "a02_base_rate": 0.563,
+    "a02_logreg_train": 0.829,
+    "a02_logreg_test": 0.77,
+    "a02_tree3_test": 0.693,
+    "a02_deeptree_train": 1.0,
+    "a02_deeptree_test": 0.719,
+    "a03_r2_numeric_only": 0.642,
+    "a03_r2_with_cats": 0.785,
+    "a03_mae_with_cats": 99.65,
+    "a03_cv_r2_mean": 0.767,
+    "a03_mae_dummy": 210.21,
+    "a03_r2_with_leak": 0.969,
+    "hw_cv_r2_mean": 0.572,
+    "hw2_base_rate": 0.616,
+    "hw2_response_rate": 0.384,
+    "hw2_cv_acc": 0.774,
+    "hw2_test_acc": 0.781,
+    "hw2_overall_test_rate": 0.358,
+    "hw2_top30_rate": 0.75,
+    "hw2_acc_with_leak": 0.98
+  },
+  "dirt": {
+    "orders_duplicates": 30,
+    "customers_duplicates": 15,
+    "customers_missing_email": 40,
+    "customers_missing_country": 25,
+    "country_label_counts": {
+      "Slovenia": 300,
+      "Italy": 211,
+      "Germany": 192,
+      "Croatia": 156,
+      "Austria": 132,
+      "Hungary": 101,
+      "SI": 43,
+      "NaN": 25,
+      "Italia": 23,
+      "HR": 17,
+      "slovenia": 15
+    }
+  },
+  "sizes": {
+    "orders": 4644,
+    "customers": 1215,
+    "products": 60,
+    "features": 1093,
+    "value": 1093,
+    "homework": 420,
+    "winback": 804
+  },
+  "a02_repeat_rate": 0.437
+}
