@@ -19,3 +19,10 @@ desktop.ini
 .vscode/
 .idea/
 *.swp
+
+# Repo scope: this repo is workshops-only.
+# Keep course-internal files out (anchored to root; workshops/README.md still tracked).
+/CLAUDE.md
+/README.md
+/planning/
+/navodila-pred-tecajem.docx
