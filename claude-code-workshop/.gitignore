@@ -1,0 +1,6 @@
+# Generated render outputs (the .qmd is the source of truth)
+slides/*.html
+slides/*_files/
+# Python scratch
+**/__pycache__/
+*.pyc

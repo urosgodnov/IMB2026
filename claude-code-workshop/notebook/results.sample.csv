@@ -1,0 +1,13 @@
+setting_group,setting,input_tokens,output_tokens,cached_input_tokens,usd_cost,latency_s
+model,opus,1500,600,0,0.0225,6.0
+model,sonnet,1500,600,0,0.0135,3.5
+model,haiku,1500,600,0,0.0045,2.0
+effort,low,1500,300,0,0.0150,4.0
+effort,medium,1500,600,0,0.0225,6.0
+effort,high,1500,1200,0,0.0375,10.0
+effort,xhigh,1500,2000,0,0.0575,16.0
+effort,max,1500,3000,0,0.0825,24.0
+caching,uncached,8000,400,0,0.0500,7.0
+caching,cached,200,400,8000,0.0150,4.0
+context,small,800,400,0,0.0140,4.0
+context,stuffed,20000,400,0,0.1100,9.0
