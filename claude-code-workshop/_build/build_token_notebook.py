@@ -109,6 +109,72 @@ else:
     print(res.to_string(index=False))
 """
 
+CELL_6_MD = """\
+## Bonus: Claude vs DeepSeek — the same task, a different bill
+
+The "DeepSeek moment" of January 2025 showed that **capability and price came
+apart**: a far cheaper model can do a similar job. Here we make that concrete —
+the *same* summary prompt sent to Claude and to **DeepSeek V4 Flash**, each
+priced with its own tariff.
+
+DeepSeek exposes an **OpenAI-compatible API**, so it is called with the `openai`
+SDK (only the `base_url` and model name change) — not the Anthropic SDK.
+
+As above, the table and chart read a committed CSV and need **no key**; the live
+measurement is gated and needs BOTH `ANTHROPIC_API_KEY` and `DEEPSEEK_API_KEY`.
+"""
+
+CELL_7_CODE = """\
+# Provider comparison — reads providers.csv (real run) or providers.sample.csv.
+import token_lab
+from IPython.display import Image, display
+
+prov = token_lab.load_providers()
+prov_display = prov.copy()
+# "per 1,000 runs" makes the tiny per-task numbers tangible for a business reader.
+prov_display["usd_per_1000_runs"] = (prov_display["usd_cost"] * 1000).round(2)
+display(prov_display)
+
+chart = token_lab.make_provider_chart(prov, '.')
+print(chart)
+display(Image(filename=chart))
+"""
+
+CELL_8_MD = """\
+## Optional: measure the provider comparison yourself
+
+The cell below sends the same prompt to Claude and DeepSeek live and overwrites
+`providers.csv`.
+
+**Requirements:**
+- `ANTHROPIC_API_KEY` (Claude) and `DEEPSEEK_API_KEY` (DeepSeek — get one at
+  platform.deepseek.com) set in your environment.
+- 3 tiny API calls total; a fraction of a US cent.
+
+If either key is missing, the cell skips gracefully and the committed results stay.
+"""
+
+CELL_9_CODE = """\
+# GATED: live provider comparison — needs ANTHROPIC_API_KEY and DEEPSEEK_API_KEY.
+import os
+import token_lab
+
+A_KEY = os.environ.get("ANTHROPIC_API_KEY")
+D_KEY = os.environ.get("DEEPSEEK_API_KEY")
+if not (A_KEY and D_KEY):
+    missing = [k for k, v in [("ANTHROPIC_API_KEY", A_KEY), ("DEEPSEEK_API_KEY", D_KEY)] if not v]
+    print(f"Missing {missing} — skipping live provider comparison; reading committed results.")
+else:
+    import anthropic
+    from openai import OpenAI
+    anthropic_client = anthropic.Anthropic()
+    deepseek_client = OpenAI(api_key=D_KEY, base_url=token_lab.DEEPSEEK_BASE_URL)
+    prov = token_lab.measure_providers(anthropic_client, deepseek_client)
+    prov.to_csv("providers.csv", index=False)
+    print("Wrote providers.csv")
+    print(prov.to_string(index=False))
+"""
+
 # ---------------------------------------------------------------------------
 # Build
 # ---------------------------------------------------------------------------
@@ -131,6 +197,10 @@ def build() -> None:
         new_code_cell(CELL_3_CODE),
         new_markdown_cell(CELL_4_MD),
         new_code_cell(CELL_5_CODE),
+        new_markdown_cell(CELL_6_MD),
+        new_code_cell(CELL_7_CODE),
+        new_markdown_cell(CELL_8_MD),
+        new_code_cell(CELL_9_CODE),
     ]
 
     NOTEBOOK_DIR.mkdir(parents=True, exist_ok=True)

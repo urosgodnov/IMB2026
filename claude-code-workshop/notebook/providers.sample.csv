@@ -1,0 +1,4 @@
+provider,model,input_tokens,output_tokens,usd_cost,latency_s
+Anthropic,Claude Opus 4.8,1500,600,0.0225,6.0
+Anthropic,Claude Haiku 4.5,1500,600,0.0045,2.0
+DeepSeek,DeepSeek V4 Flash,1500,600,0.000378,3.0

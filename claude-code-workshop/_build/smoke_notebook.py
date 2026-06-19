@@ -25,6 +25,7 @@ sys.path.insert(0, str(NOTEBOOK_DIR))
 
 # Explicitly make sure no API key is active for this smoke run.
 os.environ.pop("ANTHROPIC_API_KEY", None)
+os.environ.pop("DEEPSEEK_API_KEY", None)
 
 # Use the Agg backend before importing token_lab (which also sets it, but
 # doing it here is belt-and-braces).
@@ -57,6 +58,19 @@ with tempfile.TemporaryDirectory() as tmpdir:
         ppath = pathlib.Path(p)
         assert ppath.exists(), f"Chart file not found: {p}"
         assert ppath.stat().st_size > 0, f"Chart file is empty: {p}"
+
+# ---------------------------------------------------------------------------
+# 3. provider comparison — load_providers + make_provider_chart (no key)
+# ---------------------------------------------------------------------------
+prov = token_lab.load_providers(notebook_dir=NOTEBOOK_DIR)
+assert prov is not None and len(prov) > 0, "load_providers() returned empty"
+for col in ("provider", "model", "usd_cost"):
+    assert col in prov.columns, f"providers CSV missing column: {col}"
+
+with tempfile.TemporaryDirectory() as tmpdir:
+    chart = token_lab.make_provider_chart(prov, tmpdir)
+    cpath = pathlib.Path(chart)
+    assert cpath.exists() and cpath.stat().st_size > 0, f"provider chart missing/empty: {chart}"
 
 # ---------------------------------------------------------------------------
 print("NOTEBOOK SMOKE OK")

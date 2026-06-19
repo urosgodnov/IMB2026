@@ -337,3 +337,111 @@ def measure_settings(client) -> pd.DataFrame:
 
     df = pd.DataFrame(rows, columns=RESULTS_HEADER)
     return df
+
+
+# ===========================================================================
+# Provider comparison: Claude vs DeepSeek  (cost for the SAME task)
+# ===========================================================================
+# Prices per 1M tokens. Claude from cc-facts.md; DeepSeek V4 Flash verified
+# 2026-06-19 ($0.14 in / $0.28 out). DeepSeek speaks an OpenAI-compatible API,
+# so it is called with the `openai` SDK (base_url swapped), NOT the Anthropic SDK.
+PROVIDER_PRICES = {
+    "Claude Opus 4.8":   (5.0, 25.0),
+    "Claude Haiku 4.5":  (1.0,  5.0),
+    "DeepSeek V4 Flash": (0.14, 0.28),
+}
+
+PROVIDERS_HEADER = [
+    "provider", "model", "input_tokens", "output_tokens", "usd_cost", "latency_s",
+]
+
+# (vendor, display model name, model id) — order = chart order
+_PROVIDER_CALLS = [
+    ("Anthropic", "Claude Opus 4.8",   "claude-opus-4-8"),
+    ("Anthropic", "Claude Haiku 4.5",  "claude-haiku-4-5"),
+    ("DeepSeek",  "DeepSeek V4 Flash", "deepseek-v4-flash"),  # 'deepseek-chat' retires 2026-07-24
+]
+
+# DeepSeek OpenAI-compatible endpoint.
+DEEPSEEK_BASE_URL = "https://api.deepseek.com"
+
+
+def provider_usd_cost(model_name: str, input_tokens: int, output_tokens: int) -> float:
+    """Cost of one call using PROVIDER_PRICES (no caching in this comparison)."""
+    in_price, out_price = PROVIDER_PRICES[model_name]
+    return round(input_tokens * in_price / 1e6 + output_tokens * out_price / 1e6, 8)
+
+
+def load_providers(notebook_dir=None) -> pd.DataFrame:
+    """Load providers.csv if present, else providers.sample.csv (illustrative)."""
+    base = pathlib.Path(notebook_dir) if notebook_dir is not None else _MODULE_DIR
+    real = base / "providers.csv"
+    sample = base / "providers.sample.csv"
+    if real.exists():
+        df = pd.read_csv(real)
+        print(f"Loaded measured provider results from: {real}")
+    else:
+        df = pd.read_csv(sample)
+        print(f"No providers.csv found — using illustrative sample: {sample}")
+    return df
+
+
+def make_provider_chart(df: pd.DataFrame, outdir) -> str:
+    """Bar chart of USD cost per task by model (Claude vs DeepSeek). Returns PNG path."""
+    outdir = pathlib.Path(outdir)
+    outdir.mkdir(parents=True, exist_ok=True)
+    sub = df.copy()
+    fig, ax = plt.subplots(figsize=(7, 4))
+    colors = ["#C44E52", "#4C72B0", "#55A868"][: len(sub)]
+    ax.bar(sub["model"], sub["usd_cost"], color=colors)
+    ax.set_title("Cost of one summary task: Claude vs DeepSeek\n(same prompt; illustrative)")
+    ax.set_xlabel("Model")
+    ax.set_ylabel("USD per task")
+    top = sub["usd_cost"].max()
+    ax.set_ylim(0, top * 1.3)
+    for bar, val in zip(ax.patches, sub["usd_cost"]):
+        label = f"${val:.5f}" if val < 0.01 else f"${val:.4f}"
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + top * 0.02,
+                label, ha="center", va="bottom", fontsize=9)
+    fig.tight_layout()
+    p = outdir / "chart_providers.png"
+    fig.savefig(p, dpi=120)
+    plt.close(fig)
+    return str(p)
+
+
+def measure_providers(anthropic_client, deepseek_client) -> pd.DataFrame:
+    """
+    Send the SAME business prompt to Claude (Anthropic SDK) and DeepSeek
+    (OpenAI-compatible SDK), read each provider's own usage fields, and price
+    each with its own tariff. Returns a DataFrame (PROVIDERS_HEADER columns).
+
+    Parameters
+    ----------
+    anthropic_client : anthropic.Anthropic
+    deepseek_client  : openai.OpenAI   # built with base_url=DEEPSEEK_BASE_URL
+    """
+    rows = []
+    for vendor, model_name, model_id in _PROVIDER_CALLS:
+        t0 = time.time()
+        if vendor == "Anthropic":
+            r = anthropic_client.messages.create(
+                model=model_id, max_tokens=256,
+                messages=[{"role": "user", "content": _BUSINESS_PROMPT}],
+            )
+            inp, out = r.usage.input_tokens, r.usage.output_tokens
+        else:  # DeepSeek via OpenAI-compatible Chat Completions API
+            r = deepseek_client.chat.completions.create(
+                model=model_id, max_tokens=256,
+                messages=[{"role": "user", "content": _BUSINESS_PROMPT}],
+            )
+            inp, out = r.usage.prompt_tokens, r.usage.completion_tokens
+        rows.append({
+            "provider": vendor,
+            "model": model_name,
+            "input_tokens": inp,
+            "output_tokens": out,
+            "usd_cost": provider_usd_cost(model_name, inp, out),
+            "latency_s": round(time.time() - t0, 2),
+        })
+    return pd.DataFrame(rows, columns=PROVIDERS_HEADER)

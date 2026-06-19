@@ -30,6 +30,7 @@ REQUIRED_FILES = [
     "notebook/token-consumption-lab.ipynb",
     "notebook/token_lab.py",
     "notebook/results.sample.csv",
+    "notebook/providers.sample.csv",
     # Exercise cards
     "exercises/b1-setup.md",
     "exercises/b2-loop-and-goal.md",
