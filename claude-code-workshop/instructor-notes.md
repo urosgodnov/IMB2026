@@ -123,6 +123,17 @@ This makes a dozen small API calls and costs **a few cents** (typically under
 $0.10). Perfectly safe to run live; just requires `ANTHROPIC_API_KEY` set in
 the environment.
 
+### Bonus — Claude vs DeepSeek provider comparison (notebook cells 6–9)
+
+The notebook ends with an optional cost comparison: the same prompt sent to
+Claude **and** to DeepSeek V4 Flash, each priced with its own tariff — the
+"DeepSeek moment" slide (B3) made concrete in real numbers (~60× cheaper for
+this task). The table and chart render from sample data with **no key**. The
+live cell needs a **second key, `DEEPSEEK_API_KEY`** (free signup at
+platform.deepseek.com) alongside `ANTHROPIC_API_KEY`, and costs a fraction of a
+cent. No DeepSeek key? Just present the pre-executed sample numbers — they make
+the same point.
+
 ---
 
 ## Fallback Cues
@@ -163,7 +174,8 @@ All commands, pricing, and Antigravity limits in this workshop were verified on
 Before each delivery, re-verify:
 - Claude Code CLI commands (`/model`, `/effort`, `/usage`, `/loop`, `/schedule`,
   `claude mcp add`) against the current Claude Code docs.
-- Token pricing (input/output per 1M tokens for Opus, Sonnet, Haiku).
+- Token pricing (input/output per 1M tokens for Opus, Sonnet, Haiku, and
+  DeepSeek V4 Flash — used in the B3b provider-comparison demo).
 - Antigravity free-tier weekly quota and MCP endpoint URL.
 - Node.js MCP package names (`@modelcontextprotocol/server-filesystem`, GitHub
   MCP URL) for any version or naming changes.
