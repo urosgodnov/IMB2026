@@ -241,6 +241,41 @@ Cache reads cost ~10% of a normal read.
 Caching is automatic when Claude Code reuses context. Participants don't need to configure it manually — just good to know why costs drop on repeated runs.
 :::
 
+## A real-world cost shock: the "DeepSeek moment"
+
+In **January 2025** a little-known lab — **DeepSeek** — released a
+frontier-level model it said was trained for a fraction of the usual cost,
+with an API priced to match.
+
+- Markets reacted overnight: about **$600 billion** wiped off Nvidia in a single
+  day (late Jan 2025) — the biggest one-day drop for any company up to that point.
+- The lasting lesson isn't the stock move. It's that **capability and price came
+  apart**: similar answers can cost wildly different amounts.
+
+::: notes
+Tell it as a story: an unknown lab shipped something nearly as good as the frontier, far cheaper, and the market panicked. For a business audience the point is NOT "switch to DeepSeek" — it's that "good enough" and "cheap" stopped being opposites. That is exactly what the dials in this block let you exploit.
+:::
+
+## Same task, very different bill
+
+| Model | Input $/1M | Output $/1M |
+|---|---:|---:|
+| Claude Opus 4.8 | $5.00 | $25.00 |
+| Claude Sonnet 4.6 | $3.00 | $15.00 |
+| Claude Haiku 4.5 | $1.00 | $5.00 |
+| DeepSeek V4 Flash | $0.14 | $0.28 |
+
+- The same monthly-report task can cost **10–100×** more or less depending on the model.
+- **But cheaper ≠ automatically better:** capability, speed, reliability — and
+  *where your data goes* — differ. (DeepSeek's API is China-hosted — a governance
+  question, not just a price one.)
+- That's the point of `/model` and `/effort`: **right-size the model to the job** —
+  pay for a big model where it earns its keep, use a small one where it doesn't.
+
+::: notes
+The manager's takeaway of the whole block: model choice is a budget lever, not a technical detail. Prices verified June 2026 — re-check before delivery (both DeepSeek and Anthropic change pricing). The China-hosted-data caveat is a natural hook to revisit during the verify-everything wrap (Block 6) if you want to widen "verify the output" into "also weigh where the data goes."
+:::
+
 ## ▶ Your turn — B3b (read the meter)
 
 Check what you have spent this session:
