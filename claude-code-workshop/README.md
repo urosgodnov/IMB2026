@@ -10,6 +10,29 @@ paid Claude access (Pro, Max, or API billing) and is **a standalone
 professional workshop, entirely outside the IMB 2026 MADA student course's
 free-tools track**.
 
+## Getting the Materials
+
+**Participants — download the workshop files** (the repository is public, no
+sign-in needed):
+
+- **Easiest, no Git:** open
+  [github.com/urosgodnov/IMB2026](https://github.com/urosgodnov/IMB2026) → green
+  **Code ▸ Download ZIP** → unzip → work inside the `claude-code-workshop/` folder.
+- **With Git (terminal):**
+  ```
+  git clone https://github.com/urosgodnov/IMB2026.git
+  cd IMB2026/claude-code-workshop
+  ```
+
+Exercise cards are in `exercises/`, the dataset in `data/orders.csv`. Start
+`claude` from inside the `claude-code-workshop/` folder. (The clone/ZIP also
+contains other course material; participants only need `claude-code-workshop/`.)
+
+**Block 3b — the three-tier LLM demo** opens straight in Google Colab, no
+download needed:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/urosgodnov/IMB2026/blob/main/claude-code-workshop/notebook/llm-tiers-colab.ipynb)
+
 ## The One-Project Spine
 
 The day is structured around a single business deliverable that grows in
