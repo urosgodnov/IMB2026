@@ -78,6 +78,15 @@ jupyter nbconvert --to notebook --execute --inplace notebook/token-consumption-l
 This costs a few cents (a dozen small API calls). Details in
 `instructor-notes.md`.
 
+### Three-tier Colab demo (`notebook/llm-tiers-colab.ipynb`)
+
+A second, **self-contained Colab notebook**: the same product-labelling task run on
+three tiers — **Gemini** (free, inside Colab, no key), **DeepSeek** and **Claude**
+(each needs an API key). Open it in Google Colab (it installs its own dependencies
+and needs no other files); the free Gemini tier runs with no key. It teaches the
+free-vs-key boundary — *a key earns its keep when AI must run without you*. Details
+in `instructor-notes.md`.
+
 ## Cost Budget
 
 See `instructor-notes.md` for per-participant cost estimates and the

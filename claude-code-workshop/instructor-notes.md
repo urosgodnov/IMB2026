@@ -86,6 +86,22 @@ behaviour) survives without live execution.
 
 ---
 
+## Block 5b — NotebookLM (free bonus)
+
+`exercises/b5b-notebooklm.md` is a hands-on card: participants upload the
+workshop's own PDF handouts (`pdf/`) into NotebookLM (free, any Google account —
+the same one Block 5 needs) and generate grounded answers, a Study Guide, and an
+Audio Overview. Two facilitator notes:
+
+- **Share the handout PDFs** (the `pdf/` folder) before this block so everyone has
+  sources to upload. A public URL or a Google Doc also works as a source.
+- **Audio Overview takes a minute or two** and can queue. Pre-generate one on your
+  own account before the session as a fallback, and keep talking through the chat
+  while theirs render. Free-tier daily limits apply. NotebookLM features verified
+  2026-06-21.
+
+---
+
 ## Per-Participant Cost Budget
 
 ### Recommended: Pro or Max subscription (flat-rate)
@@ -134,6 +150,25 @@ platform.deepseek.com) alongside `ANTHROPIC_API_KEY`, and costs a fraction of a
 cent. No DeepSeek key? Just present the pre-executed sample numbers — they make
 the same point.
 
+### Bonus — Three tiers, one task (`notebook/llm-tiers-colab.ipynb`)
+
+A separate, self-contained **Colab** notebook runs the *same* product-labelling
+task on three tiers and charts the cost of each:
+
+- **Gemini** via `google.colab.ai` — free, no key, **Colab-only** (`from
+  google.colab import ai`). Free models `google/gemini-2.5-flash[-lite]`, monthly
+  limit; cost shown as $0.
+- **DeepSeek** — cheap, needs `DEEPSEEK_API_KEY`; the tier that "runs without you".
+- **Claude** — premium, needs `ANTHROPIC_API_KEY`.
+
+The teaching point is the **free-vs-key boundary**: free Gemini is ideal while you
+sit and click *Run*; the moment AI must run unattended (a script, a schedule —
+Block 6), you need a key, and DeepSeek shows that costs a fraction of a cent. The
+notebook ships pre-executed with an illustrative cost chart, and each tier **skips
+gracefully** when unavailable. To run live, open it in Colab and (for the paid
+tiers) set the keys — deferred to the facilitator, like the other notebook.
+Verified 2026-06-21.
+
 ---
 
 ## Fallback Cues
@@ -179,3 +214,7 @@ Before each delivery, re-verify:
 - Antigravity free-tier weekly quota and MCP endpoint URL.
 - Node.js MCP package names (`@modelcontextprotocol/server-filesystem`, GitHub
   MCP URL) for any version or naming changes.
+- `google.colab.ai` free-tier availability and model names
+  (`google/gemini-2.5-flash[-lite]`) for the three-tier Colab notebook.
+- NotebookLM free-tier limits, source types, and the Audio Overview / Study Guide
+  feature names for the B5b card.

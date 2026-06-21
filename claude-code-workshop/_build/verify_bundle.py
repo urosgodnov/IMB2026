@@ -31,12 +31,16 @@ REQUIRED_FILES = [
     "notebook/token_lab.py",
     "notebook/results.sample.csv",
     "notebook/providers.sample.csv",
+    # Three-tier Colab notebook (Gemini / DeepSeek / Claude, same task)
+    "notebook/llm-tiers-colab.ipynb",
+    "notebook/tier_lab.py",
     # Exercise cards
     "exercises/b1-setup.md",
     "exercises/b2-loop-and-goal.md",
     "exercises/b3-efforts-and-tokens.md",
     "exercises/b4-mcp-and-github.md",
     "exercises/b5-antigravity.md",
+    "exercises/b5b-notebooklm.md",
     "exercises/b6-loop-automation.md",
     # Fallbacks
     "fallbacks/b2-sales-summary.py",
@@ -60,6 +64,7 @@ SUB_SCRIPTS = [
     "_build/check_cards.py",
     "_build/check_fallbacks.py",
     "_build/smoke_notebook.py",
+    "_build/smoke_tiers.py",
 ]
 
 
